@@ -1,5 +1,8 @@
 package ru.hutoroff.subset;
 
+import ru.hutoroff.subset.exception.WordFinderException;
+import ru.hutoroff.subset.finder.WordsFromFileFinder;
+
 /**
  * Created by hutoroff on 16.02.17.
  */
@@ -18,6 +21,13 @@ public class Application {
         System.out.println("Word: " + word);
         System.out.println("Path to dict: " + dictPath);
 
-        //TODO: logic
+        WordsFromFileFinder wordsFromFileFinder;
+        try {
+            wordsFromFileFinder = new WordsFromFileFinder(word, dictPath);
+        } catch (WordFinderException e) {
+            e.printStackTrace();
+            return;
+        }
+        wordsFromFileFinder.findSubsetsFromWord().forEach(System.out::println);
     }
 }
