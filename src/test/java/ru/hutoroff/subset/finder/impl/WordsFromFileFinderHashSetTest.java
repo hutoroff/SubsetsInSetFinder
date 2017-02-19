@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ru.hutoroff.subset.exception.WordFinderException;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertNotNull;
@@ -14,17 +13,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by hutoroff on 16.02.17.
  */
-public class WordsFromFileFinderHashSetTest {
-
-    private static final String TEST_WORD = "крокодил";
-    private static final String PATH_TO_DICT = WordsFromFileFinderHashSetTest.class.getResource("/testDict.txt").getPath();
-    private static final Set<String> EXPECTED_SET = new HashSet<String>() {
-        {
-            add("код");
-            add("док");
-            add("род");
-        }
-    };
+public class WordsFromFileFinderHashSetTest extends WordsFromFileFinderTest {
 
     @Rule
     public final ExpectedException wordsFinderException = ExpectedException.none();
