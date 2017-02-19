@@ -1,4 +1,4 @@
-package ru.hutoroff.subset.finder;
+package ru.hutoroff.subset.finder.helper;
 
 import java.util.Collections;
 import java.util.HashSet;

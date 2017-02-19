@@ -2,6 +2,7 @@ package ru.hutoroff.subset;
 
 import ru.hutoroff.subset.exception.WordFinderException;
 import ru.hutoroff.subset.finder.WordsFromFileFinder;
+import ru.hutoroff.subset.finder.impl.WordsFromFileFinderHashSet;
 
 /**
  * Created by hutoroff on 16.02.17.
@@ -23,7 +24,7 @@ public class Application {
 
         WordsFromFileFinder wordsFromFileFinder;
         try {
-            wordsFromFileFinder = new WordsFromFileFinder(word, dictPath);
+            wordsFromFileFinder = new WordsFromFileFinderHashSet(word, dictPath);
         } catch (WordFinderException e) {
             e.printStackTrace();
             return;

@@ -1,6 +1,7 @@
 package ru.hutoroff.subset.finder;
 
 import org.junit.Test;
+import ru.hutoroff.subset.finder.helper.WordPermutation;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package ru.hutoroff.subset.finder;
+package ru.hutoroff.subset.finder.impl;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,10 +14,10 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by hutoroff on 16.02.17.
  */
-public class WordsFromFileFinderTest {
+public class WordsFromFileFinderHashSetTest {
 
     private static final String TEST_WORD = "крокодил";
-    private static final String PATH_TO_DICT = WordsFromFileFinderTest.class.getResource("/testDict.txt").getPath();
+    private static final String PATH_TO_DICT = WordsFromFileFinderHashSetTest.class.getResource("/testDict.txt").getPath();
     private static final Set<String> EXPECTED_SET = new HashSet<String>() {
         {
             add("код");
@@ -32,18 +32,18 @@ public class WordsFromFileFinderTest {
     @Test
     public void testConstructor_badFile() throws Exception {
         wordsFinderException.expect(WordFinderException.class);
-        new WordsFromFileFinder(TEST_WORD, "dict1.txt");
+        new WordsFromFileFinderHashSet(TEST_WORD, "dict1.txt");
     }
 
     @Test
     public void testConstructor_success() throws Exception {
-        WordsFromFileFinder underTest = new WordsFromFileFinder(TEST_WORD, "/home/hutoroff/words.txt");
+        WordsFromFileFinderHashSet underTest = new WordsFromFileFinderHashSet(TEST_WORD, "/home/hutoroff/words.txt");
         assertNotNull(underTest);
     }
 
     @Test
     public void testFindSubsetsFromWord() throws Exception {
-        WordsFromFileFinder underTest = new WordsFromFileFinder(TEST_WORD, PATH_TO_DICT);
+        WordsFromFileFinderHashSet underTest = new WordsFromFileFinderHashSet(TEST_WORD, PATH_TO_DICT);
         assertNotNull(underTest);
         Set<String> actual = underTest.findSubsetsFromWord();
         assertNotNull(actual);
