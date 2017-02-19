@@ -53,7 +53,7 @@ public class WordsFromFileFinderPrimitive implements WordsFromFileFinder {
         for (int i = 0; i < line.length(); i++) {
             int charIdx = lWord.indexOf(line.charAt(i));
             if(charIdx > -1)
-                lWord = lWord.substring(0,charIdx) + lWord.substring(charIdx + 1);
+                lWord = new StringBuilder(lWord).deleteCharAt(charIdx).toString();
             else
                 return false;
         }
