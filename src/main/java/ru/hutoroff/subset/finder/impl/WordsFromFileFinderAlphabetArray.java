@@ -19,16 +19,16 @@ public class WordsFromFileFinderAlphabetArray implements WordsFromFileFinder {
     private int[] testWordSymbolsWithCount;
     private Path pathToDict;
     private Queue<Character> touchedTestWordSymbolsIndexes;
-    private Set<String> result;
+    private List<String> result;
     private Character queueElement;
 
     private WordsFromFileFinderAlphabetArray(String targetWord, Path pathToDict) {
         this.pathToDict = pathToDict;
         this.sourceWordSymbolsWithCount = new int[Character.MAX_VALUE];
         this.testWordSymbolsWithCount = new int[Character.MAX_VALUE];
-        this.touchedTestWordSymbolsIndexes = new ArrayDeque<>();
+        this.touchedTestWordSymbolsIndexes = new LinkedList<>();
         this.queueElement = null;
-        for (char c : targetWord.toCharArray())
+        for (char c : targetWord.toLowerCase().toCharArray())
             sourceWordSymbolsWithCount[c] = sourceWordSymbolsWithCount[c] + 1;
     }
 
@@ -40,7 +40,7 @@ public class WordsFromFileFinderAlphabetArray implements WordsFromFileFinder {
     public Collection<String> findSubsetsFromWord() throws WordFinderException {
         if(this.result == null)
             try {
-                this.result = Files.lines(this.pathToDict).filter(this::filterLine).collect(Collectors.toCollection(HashSet::new));
+                this.result = Files.lines(this.pathToDict).filter(this::filterLine).collect(Collectors.toCollection(LinkedList::new));
             } catch (IOException e) {
                 throw new WordFinderException("Error on reading dict: " + pathToDict, e);
             }
@@ -64,6 +64,7 @@ public class WordsFromFileFinderAlphabetArray implements WordsFromFileFinder {
         if(touchedTestWordSymbolsIndexes.size() > Character.MAX_VALUE) {
             for (int i = 0; i < testWordSymbolsWithCount.length; i++)
                 testWordSymbolsWithCount[i] = 0;
+            touchedTestWordSymbolsIndexes.clear();
         } else {
             do {
                 queueElement = touchedTestWordSymbolsIndexes.poll();
