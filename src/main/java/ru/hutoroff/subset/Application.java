@@ -2,8 +2,8 @@ package ru.hutoroff.subset;
 
 import ru.hutoroff.subset.exception.WordFinderException;
 import ru.hutoroff.subset.finder.WordsFromFileFinder;
+import ru.hutoroff.subset.finder.impl.WordsFromFileFinderAlphabetArray;
 import ru.hutoroff.subset.finder.impl.WordsFromFileFinderPrimitive;
-import ru.hutoroff.subset.finder.impl.WordsFromFileFinderStructured;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -29,7 +29,7 @@ public class Application {
         System.out.println("Word: " + word);
         System.out.println("Path to dict: " + dictPath);
         if(solutionType != null)
-            System.out.println("Solution type: " + (solutionType == 0 ? "Primitive based" : "Structure based"));
+            System.out.println("Solution type: " + (solutionType == 0 ? "Primitive based" : "Alphabet based"));
         else
             solutionType = 1;
 
@@ -50,7 +50,7 @@ public class Application {
         } else {
             try {
                 start = Instant.now();
-                wordsFromFileFinder = new WordsFromFileFinderStructured(word, dictPath);
+                wordsFromFileFinder = new WordsFromFileFinderAlphabetArray(word, dictPath);
                 wordsFromFileFinder.findSubsetsFromWord().forEach(System.out::println);
                 finish = Instant.now();
                 counter = wordsFromFileFinder.findSubsetsFromWord().size();
